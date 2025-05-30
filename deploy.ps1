@@ -1,8 +1,8 @@
 $ErrorActionPreference = "Stop"
 
 $projectImages = @(
-    @{ Name = "rental-configserver"; Path = ".\ConfigServer" },
     @{ Name = "rental-eurekaserver"; Path = ".\EurekaServer" },
+    @{ Name = "rental-configserver"; Path = ".\ConfigServer" },
     @{ Name = "rental-gateway"; Path = ".\CloudGateway" },
 #     @{ Name = "rental-db"; Path = ".\database" },
     @{ Name = "rental-customer"; Path = ".\customer" }
@@ -50,8 +50,8 @@ Write-Host "`n>> Building Docker images..." -ForegroundColor Cyan
 #         Write-Host "!! Directory $project non trovata, salto..." -ForegroundColor Yellow
 #     }
 # }
-# docker build -t rental-configserver:latest .\ConfigServer
 # docker build -t rental-eurekaserver:latest .\EurekaServer
+# docker build -t rental-configserver:latest .\ConfigServer
 # docker build -t rental-gateway:latest .\CloudGateway
 # docker build -t rental-customer:latest .\customer
 foreach ($image in $projectImages) {
@@ -91,19 +91,22 @@ function Wait-For-Container {
     }
 }
 
-Write-Host "`n>> Avvio Config Server..." -ForegroundColor Cyan
-docker compose up -d config-server
-Wait-For-Container -name "Config Server" -url "http://localhost:8888/actuator/health"
-
 Write-Host "`n>> Avvio Eureka Server..." -ForegroundColor Cyan
 docker compose up -d eureka-server
 Wait-For-Container -name "Eureka Server" -url "http://localhost:8761/actuator/health"
+
+Write-Host "`n>> Avvio Config Server..." -ForegroundColor Cyan
+docker compose up -d config-server
+Wait-For-Container -name "Config Server" -url "http://localhost:8888/actuator/health"
 
 Write-Host "`n>> Avvio Gateway..." -ForegroundColor Cyan
 docker compose up -d gateway
 
 Write-Host "`n>> Avvio Customer..." -ForegroundColor Cyan
 docker compose up -d customer
+
+Wait-For-Container -name "Customer" -url "http://localhost:8080/actuator/health"
+Wait-For-Container -name "Gateway" -url "http://localhost:9090/actuator/health"
 
 Write-Host "`n[V] Tutti i servizi sono avviati correttamente!" -ForegroundColor Green
 Send-Notification -title "Deploy completato" -message "Tutti i servizi sono stati avviati con successo!"
