@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("/customers/cities")
+@RequestMapping("/cities")
 public class CityController extends EntityController<City> {
 
     public CityController(CityService service) {
