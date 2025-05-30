@@ -105,7 +105,7 @@ docker compose up -d gateway
 Write-Host "`n>> Avvio Customer..." -ForegroundColor Cyan
 docker compose up -d customer
 
-Wait-For-Container -name "Customer" -url "http://localhost:8080/actuator/health"
+# Wait-For-Container -name "Customer" -url "http://localhost:8080/actuator/health"
 Wait-For-Container -name "Gateway" -url "http://localhost:9090/actuator/health"
 
 Write-Host "`n[V] Tutti i servizi sono avviati correttamente!" -ForegroundColor Green
