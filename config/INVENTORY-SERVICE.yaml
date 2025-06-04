@@ -1,14 +1,13 @@
 server:
-  port: 8081
+  port: 8082
   servlet:
-    context-path: /api/customer
+    context-path: /api/inventory
 
 spring:
   application:
-    name: CUSTOMER-SERVICE
+    name: INVENTORY-SERVICE
   datasource:
-#    url: jdbc:postgresql://192.168.1.8:5432/loldb
-    url: jdbc:postgresql://${DB_HOST:localhost}:5432/rental_store
+    url: jdbc:postgresql://${DB_HOST:localhost}:5432/inventory
     username: postgres
     password: root
     driver-class-name: org.postgresql.Driver
@@ -27,6 +26,4 @@ eureka:
     fetch-registry: true
     register-with-eureka: true
     service-url:
-#      defaultZone: ${EUREKA_SERVER_ADDRESS:http://localhost:8761/eureka}
-#      defaultZone: http://eureka-server:8761/eureka
       defaultZone: http://${EUREKA_HOST:localhost}:8761/eureka
