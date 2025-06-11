@@ -22,10 +22,11 @@
     </properties>
 
     <modules>
-        <module>customer</module>
-        <module>CloudGateway</module>
-        <module>ConfigServer</module>
         <module>EurekaServer</module>
+        <module>ConfigServer</module>
+        <module>CloudGateway</module>
+        <module>customer</module>
+        <module>inventory</module>
     </modules>
 
     <dependencies>

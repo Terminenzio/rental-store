@@ -65,6 +65,22 @@ services:
       - EUREKA_HOST=eureka-server
       - DB_HOST=rental-db
 
+  inventory:
+    image: rental-inventory
+    ports:
+      - "8082:8082"
+    networks:
+      - rental-net
+    depends_on:
+      - config-server
+      - eureka-server
+      - rental-db
+    environment:
+      - SPRING_PROFILES_ACTIVE=default
+      - CONFIG_HOST=config-server
+      - EUREKA_HOST=eureka-server
+      - DB_HOST=rental-db
+
 # Parametri per database
 volumes:
   pgdata:

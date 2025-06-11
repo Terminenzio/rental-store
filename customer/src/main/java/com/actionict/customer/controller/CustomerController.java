@@ -38,16 +38,16 @@ public class CustomerController extends EntityController<Customer> {
     }
 
 
-    private boolean isThereAnInputError(String searchParam, String searchInput) {
-        // E' un errore se almeno una condizione è vera:
-        return
-                // l'input è più corto di 2 caratteri
-                searchInput.length() < 2
-                        // l'ordinamento è nullo
-                        || searchParam == null
-                        // l'ordinamento è diverso da "firstName" o "lastName"
-                        ||
-                            !(searchParam.equals(FIRST_NAME) || searchParam.equals(LAST_NAME))
-                ;
-    }
+//    private boolean isThereAnInputError(String searchParam, String searchInput) {
+//        // E' un errore se almeno una condizione è vera:
+//        return
+//                // l'input è più corto di 2 caratteri
+//                searchInput.length() < 2
+//                        // l'ordinamento è nullo
+//                        || searchParam == null
+//                        // l'ordinamento è diverso da "firstName" o "lastName"
+//                        ||
+//                            !(searchParam.equals(FIRST_NAME) || searchParam.equals(LAST_NAME))
+//                ;
+//    }
 }
